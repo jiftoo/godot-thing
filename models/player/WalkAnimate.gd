@@ -1,6 +1,7 @@
 extends Spatial
 
 onready var animation_player = $"AnimationPlayer"
+onready var animation_tree = $"AnimationTree"
 onready var player_node = $"/root/Spatial/Player"
 
 func _ready():
@@ -8,9 +9,7 @@ func _ready():
 
 func _process(delta):
 	var movement_speed = player_node.get("current_speed")
+	var max_speed = player_node.get("speed")
 	
-	if movement_speed > 0:
-		animation_player.playback_speed = movement_speed / 20.0 # floor sync
-		animation_player.play("Gardevoir|mixamocom|Layer0")
-	else:
-		animation_player.stop()
+	animation_player.playback_speed = movement_speed / 20.0 # floor sync
+	animation_tree.set("parameters/blend/blend_amount", movement_speed / max_speed)

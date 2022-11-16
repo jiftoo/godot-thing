@@ -4,8 +4,8 @@ extends KinematicBody
 # var a = 2
 # var b = "text"
 
-var sensitivity = 0.02
-var speed = 35.0 # 15.0
+var sensitivity = 0.12
+var speed = 15.0 # 15.0 - optimal # maximum speed value
 var acceleration = 35.5
 
 onready var camera = $"CameraHinge"
