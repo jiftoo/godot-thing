@@ -11,7 +11,8 @@ var acceleration = 35.5
 onready var camera = $"CameraHinge"
 
 export var current_speed = 0
-var current_move_direction = Vector3(0, 0, 0)
+var current_desired_direction = Vector3.ZERO
+var current_move_direction = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,6 +43,7 @@ func process_movement(delta: float):
 	direction.z += Input.is_key_pressed(KEY_D) as float
 	direction.z -= Input.is_key_pressed(KEY_A) as float
 	direction = direction.normalized()
+	current_desired_direction = direction
 	
 	if direction != Vector3.ZERO:
 		current_speed += acceleration * delta
@@ -58,8 +60,11 @@ func process_movement(delta: float):
 		current_move_direction = local_direction
 		
 	var gravity = Vector3.DOWN * 12
-		
-	move_and_slide_with_snap(current_move_direction * current_speed * (delta * 10), Vector3.DOWN, Vector3.UP, true)
+	
+	# local_direction - one time direction
+	# current_move_direction - set to local_direction and saved across frames
+	
+	var _vec = move_and_slide_with_snap(current_move_direction * current_speed * (delta * 10), Vector3.DOWN, Vector3.UP, true)
 	# doesn't work if added to movement vector of above
 	move_and_slide(gravity, Vector3.UP, true)
 	

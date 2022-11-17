@@ -1,0 +1,51 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=11 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Idle -loop"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Walk -loop"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "WalkBackwards -loop"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "WalkLeft -loop"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "WalkRight -loop"
+
+[sub_resource type="AnimationNodeBlend2" id=16]
+
+[sub_resource type="AnimationNodeBlend2" id=17]
+
+[sub_resource type="AnimationNodeBlend3" id=18]
+
+[sub_resource type="AnimationNodeTimeScale" id=13]
+
+[sub_resource type="AnimationNodeTimeScale" id=19]
+
+[resource]
+graph_offset = Vector2( 94.4207, -55.4193 )
+nodes/Idle/node = SubResource( 8 )
+nodes/Idle/position = Vector2( 430, 40 )
+nodes/Walk/node = SubResource( 9 )
+nodes/Walk/position = Vector2( 420, 150 )
+nodes/WalkBackwards/node = SubResource( 11 )
+nodes/WalkBackwards/position = Vector2( 350, 260 )
+nodes/WalkLeft/node = SubResource( 14 )
+nodes/WalkLeft/position = Vector2( 400, 370 )
+nodes/WalkRigth/node = SubResource( 15 )
+nodes/WalkRigth/position = Vector2( 390, 480 )
+nodes/left_right_blend/node = SubResource( 16 )
+nodes/left_right_blend/position = Vector2( 600, 380 )
+nodes/output/position = Vector2( 1660, 50 )
+nodes/strafe_blend/node = SubResource( 17 )
+nodes/strafe_blend/position = Vector2( 1480, 160 )
+nodes/walk_dir_blend/node = SubResource( 18 )
+nodes/walk_dir_blend/position = Vector2( 1270, -10 )
+nodes/walk_speed/node = SubResource( 13 )
+nodes/walk_speed/position = Vector2( 600, 140 )
+nodes/walk_speed_2/node = SubResource( 19 )
+nodes/walk_speed_2/position = Vector2( 600, 260 )
+node_connections = [ "walk_speed", 0, "Walk", "walk_speed_2", 0, "WalkBackwards", "left_right_blend", 0, "WalkLeft", "left_right_blend", 1, "WalkRigth", "walk_dir_blend", 0, "walk_speed_2", "walk_dir_blend", 1, "Idle", "walk_dir_blend", 2, "walk_speed", "strafe_blend", 0, "walk_dir_blend", "strafe_blend", 1, "left_right_blend", "output", 0, "strafe_blend" ]

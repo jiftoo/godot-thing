@@ -29,6 +29,10 @@ config/icon="res://icon.png"
 version_control_autoload_on_startup=true
 version_control_plugin_name="GitAPI"
 
+[global]
+
+debug=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

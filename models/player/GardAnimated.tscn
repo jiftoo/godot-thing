@@ -662,7 +662,7 @@ node_connections = [ "blend", 0, "Animation", "blend", 1, "Animation 2", "output
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -0.437, 0.192, 3.303 )
 
 [node name="Gardevoir" type="Spatial" parent="."]
-transform = Transform( 0.993676, 0.0540099, -0.0984413, -0.0522417, 0.998425, 0.0204546, 0.099391, -0.0151825, 0.994933, 0.033233, 0.500192, -0.00363234 )
+transform = Transform( 0.995819, 0.0423389, -0.0809483, -0.0418794, 0.999095, 0.00736713, 0.081187, -0.00394626, 0.996691, 0.033233, 0.500192, -0.00363234 )
 
 [node name="Skeleton" type="Skeleton" parent="Gardevoir"]
 bones/0/name = "Root"

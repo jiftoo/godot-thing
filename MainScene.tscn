@@ -1,15 +1,83 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=26 format=2]
 
+[ext_resource path="res://models/player/Gard.glb" type="PackedScene" id=1]
 [ext_resource path="res://models/player/WalkAnimate.gd" type="Script" id=2]
 [ext_resource path="res://Bobbing.gd" type="Script" id=3]
 [ext_resource path="res://Player.gd" type="Script" id=4]
 [ext_resource path="res://FootSoundSource.gd" type="Script" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
-[ext_resource path="res://models/player/GardAnimated.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 1.51401
 height = 2.99071
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Idle -loop"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Walk -loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=14]
+
+[sub_resource type="AnimationNodeBlendTree" id=15]
+graph_offset = Vector2( 258.333, 127.5 )
+nodes/Animation/node = SubResource( 13 )
+nodes/Animation/position = Vector2( 590, 230 )
+nodes/TimeScale/node = SubResource( 14 )
+nodes/TimeScale/position = Vector2( 760, 220 )
+nodes/output/position = Vector2( 920, 250 )
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "WalkRight -loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=17]
+
+[sub_resource type="AnimationNodeBlendTree" id=18]
+nodes/Animation/node = SubResource( 16 )
+nodes/Animation/position = Vector2( 240, 140 )
+nodes/TimeScale/node = SubResource( 17 )
+nodes/TimeScale/position = Vector2( 480, 130 )
+nodes/output/position = Vector2( 660, 160 )
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "WalkBackwards -loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=20]
+
+[sub_resource type="AnimationNodeBlendTree" id=21]
+nodes/Animation/node = SubResource( 19 )
+nodes/Animation/position = Vector2( 310, 130 )
+nodes/TimeScale/node = SubResource( 20 )
+nodes/TimeScale/position = Vector2( 580, 150 )
+nodes/output/position = Vector2( 770, 160 )
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "WalkLeft -loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=23]
+
+[sub_resource type="AnimationNodeBlendTree" id=24]
+nodes/Animation/node = SubResource( 22 )
+nodes/Animation/position = Vector2( 408.5, 144 )
+nodes/TimeScale/node = SubResource( 23 )
+nodes/TimeScale/position = Vector2( 640, 150 )
+nodes/output/position = Vector2( 840, 160 )
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=12]
+blend_point_0/node = SubResource( 11 )
+blend_point_0/pos = Vector2( 0, 0 )
+blend_point_1/node = SubResource( 15 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 18 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 21 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_point_4/node = SubResource( 24 )
+blend_point_4/pos = Vector2( -1, 0 )
 
 [sub_resource type="BoxShape" id=5]
 
@@ -27,10 +95,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04603, 0 )
 script = ExtResource( 4 )
 
 [node name="CameraHinge" type="Spatial" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.310179, 4.88215, 2.38419e-07 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941, 4.81, 0 )
 
 [node name="Camera" type="Camera" parent="Player/CameraHinge"]
-transform = Transform( -4.37114e-08, -3.88232e-23, -1, -3.55271e-15, 1, 1.16471e-22, 1, 3.55271e-15, -4.37114e-08, 0.428814, 0.0433164, -0.025 )
+transform = Transform( -4.37114e-08, -3.88232e-23, -1, -3.55271e-15, 1, 1.16471e-22, 1, 3.55271e-15, -4.37114e-08, 0.3, -0.0450001, -0.0263041 )
 environment = ExtResource( 6 )
 current = true
 fov = 80.0
@@ -40,9 +108,22 @@ script = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.04073, 1.01846e-07 )
 shape = SubResource( 1 )
 
-[node name="GardAnimated" parent="Player/CollisionShape" instance=ExtResource( 7 )]
-transform = Transform( 9.55343e-15, -2.18557e-07, 5, -5, -2.18557e-07, 0, 2.18557e-07, -5, -2.18557e-07, -0.437, 0.192, 3.303 )
+[node name="Gard" parent="Player/CollisionShape" instance=ExtResource( 1 )]
+transform = Transform( -0.307072, -2.31979e-07, 4.99056, -4.99056, -2.18144e-07, -0.307072, 2.31979e-07, -5, -2.18144e-07, 0.171, 0.08, 2.313 )
 script = ExtResource( 2 )
+
+[node name="Gardevoir" parent="Player/CollisionShape/Gard" index="0"]
+transform = Transform( 0.993727, 0.0535935, -0.098152, -0.0518663, 0.998452, 0.0200672, 0.0990755, -0.0148505, 0.994969, 0, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="Player/CollisionShape/Gard"]
+tree_root = SubResource( 12 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/blend_position = Vector2( -0.646456, 0.22913 )
+parameters/1/TimeScale/scale = 1.0
+parameters/2/TimeScale/scale = 1.0
+parameters/3/TimeScale/scale = 1.0
+parameters/4/TimeScale/scale = 1.0
 
 [node name="FootSoundSource" type="AudioStreamPlayer3D" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.818565, 0 )
@@ -98,3 +179,5 @@ shadow_enabled = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17389, 11.9855 )
 
 [connection signal="footstep" from="Player/CameraHinge/Camera" to="Player/FootSoundSource" method="_on_Camera_footstep"]
+
+[editable path="Player/CollisionShape/Gard"]
